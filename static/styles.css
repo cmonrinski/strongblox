@@ -1,0 +1,483 @@
+/* Colors 
+
+blues
+dark: #6fa8dc
+medium: #9fc5e8
+light: #cfe2f3
+
+greens
+dark: #93c47d
+medium: #b6d7a8
+light: #d9ead3
+
+yellows
+dark: #ffd966
+medium: #ffe599
+light: #fff2cc 
+*/
+
+/* layout */
+* {
+  font-family: 'Trebuchet MS', sans-serif;
+}
+
+h2 {
+  text-align: center;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+header {
+  border-bottom: 1px solid black; 
+  margin-bottom:10px;
+  padding-bottom: 10px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.header-home {
+  float: left;
+  padding-left: 10px;
+}
+
+.header-menu {
+  float: right;
+  padding-right: 10px;
+  margin-right: 50px;
+}
+
+.container {
+  margin-bottom: 50px;
+  padding-bottom: 10px;
+  position: fixed;
+  width: 99%;
+  overflow: auto;
+  top: 30px;
+  bottom: 0px;
+}
+
+.section {
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+}
+
+.interactive {
+  background-color: white;
+  border-bottom: 1px solid black;
+}
+
+
+.data {
+  background-color: white;
+}
+
+footer {
+  border-top: 1px solid black; 
+  margin-top: 10px;
+  padding: 10px;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.round-nav {
+  border: 1px solid black;
+  border-radius: 12px;
+  padding: 0.01em 16px;
+}
+
+select {
+  background-color: #d9ead3;
+  color: black;
+  border: 1px solid black;
+  border-radius: 12px;
+  padding: .01em 16px;
+  margin: 1px;
+  margin-bottom: 5px;
+}
+
+input {
+  background-color: #fff2cc;
+  color: black;
+  border: 1px solid black;
+  border-radius: 12px;
+  padding: .01em 16px;
+  margin: 1px;
+  margin-bottom: 5px;
+}
+
+/* Calendar */
+.calendar {
+  width: 350px;
+  margin: 5px auto 0;
+  background-color: white;
+  color: green;
+  font-family: 'Josefin Sans';
+}
+
+.calendar__month {
+  font-size: 20px;
+  font-weight: 800;
+  padding: 10px 0;
+  width: 100%;
+  position: relative;
+}
+
+.cal-month__previous,
+.cal-month__next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+}
+  
+.cal-month__previous:hover,
+.cal-month__next:hover {
+  background-color: #42A5F5;
+  box-shadow: 0 5px 5px -5px rgba(0,0,0,0.75);
+  border-radius: 50%;
+  font-weight: 800;
+  color: #111;
+}
+
+
+.cal-month__next {
+  right: 0;
+}
+
+.cal-month__current {
+  text-align: center;
+  color: red;
+}
+
+.cal-head__day,
+.cal-body__day {
+  /* display: inline-block; */
+  width: 50px;
+  height: 50px;
+  float: left;
+  text-align: center;
+}
+
+.cal-body__week,
+.calendar__head {
+  display: block;
+  height: 50px;
+  width: 350px;
+}
+
+.calendar__head {
+  line-height: 50px;
+  position: relative;
+}
+
+.calendar__head:after {
+  content: ' ';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: green;
+}
+
+.cal-body__day {
+  color: blue;
+  line-height: 50px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.cal-day__month--current {
+  color: orange;
+}
+
+.cal-day__day--today {
+  font-weight: 800;
+  color: #2196f3;
+}
+
+.cal-day__day--selected {
+  background-color: #6fa8dc;
+  box-shadow: 0 5px 10px -5px rgba(0, 0, 0, .75);
+  border-radius: 50%;
+  color: #111;
+}
+
+/* Exercise Table */
+#table-exercises th {
+  text-align: left;
+  background-color: #93c47d;
+}
+
+#table-exercises tbody > tr:nth-child(even) {
+  background-color: #cfe2f3;
+}
+
+#table-exercises tbody > tr:nth-child(odd) {
+  background-color: #9fc5e8;
+}
+
+#table-exercises tr {
+  display: grid;
+  grid-template-areas: 
+    "id na na na va va va"
+    "id fo fo mu mu ch ch";
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  border-bottom: 1px solid black;
+}
+
+.table-ex-id { 
+  grid-area: id; 
+  display: grid;
+  place-items: center center;
+  border-right: 1px solid black;
+}
+
+.table-ex-name { 
+  grid-area: na; 
+  border-bottom: 1px solid black;
+}
+.table-ex-variation { 
+  grid-area: va; 
+  border-bottom: 1px solid black;
+}
+.table-ex-focus { grid-area: fo; }
+.table-ex-muscle { grid-area: mu; }
+.table-ex-chain { grid-area: ch; }
+
+
+/* History Table */
+#table-history th {
+  display: grid;
+  vertical-align: center;
+  background-color: #93c47d;
+}
+
+#table-history td {
+  display: grid;
+}
+
+.th-left {
+  text-align: left !important;
+}
+
+#table-history tbody tr:nth-child(even) {
+  background-color: #9fc5e8;
+}
+
+#table-history tbody tr:nth-child(odd) {
+  background-color: #cfe2f3;
+}
+
+#table-history tr {
+  display: grid;
+  grid-template-columns: minmax(100px, 1fr) repeat(6, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  grid-template-areas: 
+    "da ex ex ex an an an"
+    "da va va va eq eq eq"
+    "da se se re re we we"
+    "da no no no no no no";
+}
+
+.table-date {
+  grid-area: da;
+  place-items: center center;
+  text-align: center;
+  border-bottom: 1px solid black;
+}
+
+.table-exercise {
+  grid-area: ex;
+}
+
+.table-variation {
+  grid-area: va;
+  border-bottom: 1px solid black;
+}
+
+.table-antirotation {
+  grid-area: an;
+}
+
+.table-equipment {
+  grid-area: eq;
+  border-bottom: 1px solid black;
+}
+
+.table-sets {
+  grid-area: se;
+  text-align: center;
+}
+
+.table-reps {
+  grid-area: re;
+  text-align: center;
+}
+
+.table-weight {
+  grid-area: we;
+  text-align: center;
+}
+
+.table-notes {
+  grid-area: no;
+  border-bottom: 1px solid black;
+  padding-left: 22px;
+}
+
+/* Routine page */
+
+.routine-button {
+  background-color: #6fa8dc;
+  color: black;
+  border: 1px solid black;
+  border-radius: 12px;
+  padding: .01em 16px;
+  margin: 1px;
+  margin-bottom: 5px;
+}
+
+.routine-button:hover {
+  background-color: greenyellow;
+}
+
+#delete-row {
+  margin-left: 650px;
+}
+
+.rows {
+  padding: 2px;
+  display: flex;
+}
+
+span {
+  display: inline-block;
+  width: 25px;
+  text-align: center;
+}
+
+.metrics {
+  width: 30px;
+  text-align: center;
+}
+
+.notes {
+  width: 300px;
+}
+
+/* Removing the up and down arrows in the text box */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  appearance: textfield;
+}
+
+.success {
+  text-align: center;
+}
+
+.lists {
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+  background-color: #6fa8dc;
+}
+
+/* screen sizes with width less than 768 */
+@media only screen and (max-width: 850px) {
+  /* For mobile phones: */
+  .header-menu {
+    float: right;
+    padding-right: 10px;
+    margin-right: 10px;
+  }
+  
+  footer {
+    text-align: center;
+  }
+
+  /* Routine page layout on mobiel */
+
+  .item1 { grid-area: co; }
+  .item2 { grid-area: ex; }
+  .item3 { grid-area: va; }
+  .item4 { grid-area: an; }
+  .item5 { grid-area: eq; }
+  .item6 { grid-area: se; }
+  .item7 { grid-area: re; }
+  .item8 { grid-area: lb; }
+  .item9 { grid-area: no; }
+
+  [class^="item"] {
+    align-self: center;
+    justify-self: center;
+  }
+  
+    .rows {
+      padding: 2px;
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      grid-template-areas:
+        "co co . . . ."
+        "ex ex ex va va va"
+        "an an an eq eq eq"
+        "se se re re lb lb"
+        "no no no no no no";
+      border-bottom: 1px solid black;
+      margin-right: 10px;
+    }
+  
+  .metrics {
+    width: 50%;
+  }
+
+  .notes {
+    width: 84%;
+  }
+
+  #routine-submit {
+    float: left;
+    margin-left: 10px;
+  }
+
+  #delete-row {
+    margin-left: 150px;
+    margin-right: 10px;
+    background-color: #cfe2f3;
+  }
+
+  #add-row {
+    margin-right:10px;
+    background-color: #cfe2f3;
+  }
+
+  select {
+    background-color: #93c47d;
+  }
+
+  input {
+    background-color: #ffd966;
+  }
+
+  .routine-head {
+    display: none;
+  }
+
+}

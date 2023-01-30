@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block title %}: Equipment{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+
+        <!-- Adding equipment -->
+        <div class="section interactive">
+
+            <h2>+ Equipment</h2>
+            
+            <form action="/equipment" method="post">
+                <input autocomplete="off" autofocus name="equipment" placeholder="Equipment" type="text">
+                <br>
+                <input class="lists" type="submit" value="Add">
+            </form>
+
+        </div>
+
+        <!-- Display a list of all equipment -->
+        <div class="section data">
+
+            <h2>Equipment</h2>
+            
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Equipment</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Loop through the equipment database entries to display them in this table -->
+                        {% for equipment in equipments %}
+                            <tr>
+                                <td>{{ equipment.equipment_id }}</td>
+                                <td>{{ equipment.equipment }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>     
+
+        </div>
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+        <link href="/static/favicon.ico" rel="icon">
+        
+        <link href="/static/styles.css" rel="stylesheet">
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
+        <title>StongBlox{% block title %}{% endblock %}</title>
+
+    </head>
+    <body>
+        <header>
+            <div >
+                <div class="header-home">
+                    <a href="{{ url_for('index') }}">StrongBlox</a>
+                </div>  
+                <div class="header-menu">
+                    <a href="{{ url_for('exercises') }}">exercises</a> |
+                    <a href="{{ url_for('equipment') }}">equipment</a> |
+                    <a href="{{ url_for('muscles') }}">muscles</a>
+                </div>
+            </div>
+        </header>
+        
+        
+            {% block body %}{% endblock %}
+            
+        
+        <footer>
+            <nav class="nav-footer">
+                <a class="round-nav" href="{{ url_for('routine') }}">routine</a>
+                <a class="round-nav" href="{{ url_for('history') }}">history</a>
+                <a class="round-nav" href="{{ url_for('timer') }}">timer</a>
+                <a class="round-nav" href="{{ url_for('data') }}">data</a>
+            </nav>
+        </footer>  
+    </body>  
+</html>

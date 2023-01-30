@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+
+{% block title %}: Timer{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="section">
+
+            <h2>Timer Widget</h2>
+            <p></p>
+            <div class="notes">
+                <ul>
+                    <li>Uninterrupted Time</li>
+                    <li>Interval Time</li>
+                    <ul>
+                        <li>active time</li>
+                        <li>rest time</li>
+                        <li>repeats</li>
+                        <li>beeps when time is less than __ seconds</li>
+                    </ul>
+                </ul>
+            </div>
+        </div>
+        <div class="section">
+
+            <h2>Metronome Widget</h2>
+            <p></p>
+            <div class="notes">
+                <ul>
+                    <li>tick every __ second</li>
+                    <li>toggle switch</li>
+                </ul>
+            </div>
+        </div>
+        <div class="section">
+            <h2>Set Up Timer</h2>
+
+            <p>This timer widget can sit on the routine page so the user can run an entire workout from one page</p>
+            
+            <form method="get">
+                <div class="timer">
+                    <input autocomplete="off" autofocus name="pre-activity" placeholder="Pre-Activity Time" type="number">
+                    <input autocomplete="off" autofocus name="activity" placeholder="Activity Time" type="number">
+                    <input autocomplete="off" autofocus name="rest" placeholder="Rest Time" type="number">
+                    <input autocomplete="off" autofocus name="rounds" placeholder="Rounds" type="number">
+                    <input autocomplete="off" autofocus name="recovery" placeholder="Recovery" type="number">
+                    <input autocomplete="off" autofocus name="metronome" placeholder="Metronome" type="number">
+                </div>
+                <div class="timer_action">
+                    <input type="submit" value="Start">
+                    <input type="submit" value="Pause">
+                    <input type="submit" value="End">
+                </div>
+                <div class="timer_features">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="interval_beep">
+                        <label class="form-check-label" for="interval_beep">Interval Beep</label>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="leading_beep">
+                        <label class="form-check-label" for="leading_beep">Leading Beep</label>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="metronome_beep">
+                        <label class="form-check-label" for="metronome_beep">Metronome Beep</label>
+                    </div>
+                </div>
+            </form>
+            
+        </div>
+    </div>
+
+{% endblock %}

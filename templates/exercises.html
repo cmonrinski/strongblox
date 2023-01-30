@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+
+{% block title %}: Exercises{% endblock %}
+
+{% block body %}
+    <div class="container">
+
+        <!-- Adding exercises -->
+        <div class="section interactive">
+
+            <h2>+ Exercise</h2>
+            
+            <form method="post">
+                <input autocomplete="off" autofocus name="exercise" placeholder="Exercise Name" type="text">
+                <input autocomplete="off" autofocus name="variation" placeholder="Variation" type="text">
+                <br>
+                <select name="focus">
+                    <option disabled selected>Main Focus</option>
+                    {% for focus in focuses %}
+                        <option value="{{ focus }}">{{ focus }}</option>
+                    {% endfor %}
+                </select>
+                <select name="muscle">
+                    <option disabled selected>Main Muscle</option>
+                    {% for muscle in muscles %}
+                        <option value="{{ muscle.muscle }}">{{ muscle.muscle }}</option>
+                    {% endfor %}
+                </select>
+                <select name="chain">
+                    <option disabled selected>Chain</option>
+                    {% for chain in chains %}
+                        <option value="{{ chain }}">{{ chain }}</option>
+                    {% endfor %}
+                </select>
+                <br>
+                <input class="lists" type="submit" value="Add">
+            </form>
+        </div>
+
+        <!-- Display a list of all exercises -->
+        <div class="section data">
+
+            <h2>Exercises</h2>
+
+            <table id="table-exercises">
+                <thead>
+                    <tr>
+                        <th class="table-ex-id">#</th>
+                        <th class="table-ex-name">Name</th>
+                        <th class="table-ex-variation">Variation</th>
+                        <th class="table-ex-focus">Focus</th>
+                        <th class="table-ex-muscle">Muscle</th>
+                        <th class="table-ex-chain">Chain</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Loop through the exercise database entries to display them in this table -->
+                    {% for exercise in exercises %}
+                        <tr>
+                            <td class="table-ex-id">{{ exercise.exercise_id }}</td>
+                            <td class="table-ex-name">{{ exercise.exercise }}</td>
+                            <td class="table-ex-variation">{{ exercise.variation }}</td>
+                            <td class="table-ex-focus">{{ exercise.focus }}</td>
+                            <td class="table-ex-muscle">{{ exercise.muscle }}</td>
+                            <td class="table-ex-chain">{{ exercise.chain }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

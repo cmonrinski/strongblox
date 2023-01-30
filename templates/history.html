@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+
+{% block title %}: History{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="section data">
+
+            <h2>History</h2>
+            
+            <!-- Using collapsible table example here: https://codepen.io/n3k1t/pen/OJMGgyq -->
+            
+            <div>
+                <table id="table-history">
+                    <thead>
+                        <tr>    
+                            <th class="table-date">Date</th>
+                            <th class="table-exercise th-left">Exercise</th>
+                            <th class="table-variation th-left">Variation</th>
+                            <th class="table-antirotation th-left">Antirotation</th>
+                            <th class="table-equipment th-left">Equipment</th>
+                            <th class="table-sets">Sets</th>
+                            <th class="table-reps">Reps</th>
+                            <th class="table-weight">Weight</th>
+                            <th class="table-notes th-left">Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Loop through the exercise database entries to display them in this table -->
+                        {% for routine in routines %}
+                            <tr>    
+                                <td class="table-date add-break">{{ routine.date }}</td>
+                                <td class="table-exercise">{{ routine.exercise }}</td>
+                                <td class="table-variation">{{ routine.variation }}</td>
+                                <td class="table-antirotation">{{ routine.antirotation }}</td>
+                                <td class="table-equipment">{{ routine.equipment }}</td>
+                                <td class="table-sets">{{ routine.sets }}</td>
+                                <td class="table-reps">{{ routine.reps }}</td>
+                                <td class="table-weight">{{ routine.weight }}</td>
+                                <td class="table-notes">{{ routine.notes }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        let addBreak = document.querySelectorAll(".add-break");
+        addBreak.forEach(element => element.innerHTML = element.innerHTML.replace(/,/g, "<br>"));        
+    </script>
+{% endblock %}

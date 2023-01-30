@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+{% block title %}: Routine{% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="section interactive">
+            <h2>Routine</h2>
+
+            <form action="/routine" method="post" id="routine-form">
+                <input type="submit" class="routine-button" value="Save Routine" id="routine-submit">
+                <input type="button" class="routine-button table-edit" id="delete-row" value="-">
+                <input type="button" class="routine-button table-edit" id="add-row" value="+">
+                <div class="rows" id="routine-row">
+                    <span class="item1" id="count">1</span>
+                    <select class="routine workout item2" name="exercise" id="exercise">
+                        <option selected="selected">Select Exercise</option>
+                        {% for key in variations.keys() %}
+                        <option value="{{ key }}">{{ key }}</option>
+                        {% endfor %}
+                    </select>
+                    <select class="routine workout item3" name="variation" id="variation">
+                        <option disabled selected>Select Variation</option>
+                    </select>
+                    <select class="routine workout item4" name="antirotation" id="antirotation">
+                        <option disabled selected>Select Antirotation</option>                                      
+                        {% for antirotation in antirotations %}
+                        <option value="{{ antirotation }}">{{ antirotation }}</option>
+                        {% endfor %}
+                    </select>
+                    <select class="routine workout item5" name="equipment" id="equipment">
+                        <option disabled selected>Select Equipment</option>
+                        {% for equipment in equipments %}
+                        <option value="{{ equipment[0] }}">{{ equipment[0] }}</option>
+                        {% endfor %}
+                    </select>
+                    <input class="routine metrics item6" autocomplete="off" name="sets" id="sets" placeholder="Sets" type="number">
+                    <input class="routine metrics item7" autocomplete="off" name="reps" id = "reps" placeholder="Reps" type="number">
+                    <input class="routine metrics item8" autocomplete="off" name="weight" id="weight" placeholder="Lbs" type="number">
+                    <input class="routine notes item9" autocomplete="off" name="notes" id="notes" placeholder="Notes" type="text">
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script type="text/javascript" src="{{ url_for('static', filename = 'routine.js') }}"></script>
+
+    <script type="text/javascript">
+        // JSON data from Flask App and routineData to Flask App
+
+        // Feeds variation drop down
+        const exerciseMap = {{ variations|tojson }};
+
+        // Feeds placeholder historicals
+        const routineHistory = {{ routine_history|tojson }};
+    </script>
+
+{% endblock %}

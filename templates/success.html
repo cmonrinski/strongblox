@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block title %}: Success!{% endblock %}
+
+{% block body %}
+
+    <div class="container success">
+        <a href="{{ url_for('history') }}">
+            <h2>Congrats! Workout completed!</h2>
+
+            <p>Check out the history here</p>
+        </a>
+    </div>
+
+{% endblock %}
