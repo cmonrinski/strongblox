@@ -162,10 +162,12 @@ document.addEventListener("DOMContentLoaded", () => {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(data),
+        })
+        .then((response) => {
+            if (response.ok) {
+                // Send user to success page (redirect doesn't load in Flask since POST is going through JSON)
+                window.location.assign("/success");
+            }
         });
-
-        // Send user to success page (redirect doesn't load in Flask since POST is going through JSON)
-        window.location.href = "http://192.168.1.38:5000/success";
-
     });
 });

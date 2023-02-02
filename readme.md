@@ -1,5 +1,8 @@
 strongblox
 
+Python 3.10.8
+
+
 Web app using Python3, SQLite3 and Flask to build and edit a database of workout routines that can be tracked over time.  
 
 To do list:
