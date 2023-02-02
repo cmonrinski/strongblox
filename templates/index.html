@@ -109,7 +109,7 @@
 			<!-- Loop through the exercise database entries to display them in this table -->
 			{% for routine in routines %}
 			<tr>
-				<td class="table-date">{{ routine.date }}</td>
+				<td class="table-date add-break">{{ routine.date }}</td>
 				<td class="table-exercise">{{ routine.exercise }}</td>
 				<td class="table-variation">{{ routine.variation }}</td>
 				<td class="table-antirotation">{{ routine.antirotation }}</td>
@@ -126,5 +126,10 @@
 </div>
 
 <script type="text/javascript" src="{{ url_for('static', filename = 'calendar.js') }}"></script>
+
+<script type="text/javascript">
+	let addBreak = document.querySelectorAll(".add-break");
+	addBreak.forEach(element => element.innerHTML = element.innerHTML.replace(/,/g, "<br>"));        
+</script>
 
 {% endblock %}
