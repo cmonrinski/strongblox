@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    : Account
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <div class="section">
+        <h2>Account Info</h2>
+        <ul><h3>Here is some info</h3>
+            <li>You're user_id is: {{ session["user_id"] }}</li>
+            <li>You're username is: {{ session["username"] }}</li>
+            <li>You're email address is: {{ session["email"] }}</li>
+        </ul>
+        <p>Eventually have preferences saved.</p>
+        <ul><h3>Some Ideas</h3>
+            <li>Timer clicks, sounds, etc</li>
+            <li>Add a photo</li>
+            <li>Night / Day toggle</li>
+        </ul>
+    </div>
+</div>
+
+{% endblock %}

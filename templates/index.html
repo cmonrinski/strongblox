@@ -1,6 +1,8 @@
 {% extends "layout.html" %}
 
-{% block title %}: Hello!{% endblock %}
+{% block title %}
+	: Hello!
+{% endblock %}
 
 {% block body %}
 
@@ -11,23 +13,27 @@
 		<H2>Welcome!</H2>
 		<center>
 		<p>
-		This is a workout tracker, based around high-intensity workouts, specifically the <a href="https://jps.biomedcentral.com/articles/10.1007/s12576-019-00676-7"><b>Tabata</b></a> protocol.<br>
+		This is a workout tracker, based around high-intensity workouts, specifically the <a href="https://jps.biomedcentral.com/articles/10.1007/s12576-019-00676-7"><b><font color="#6fa8dc">Tabata</font></b></a> protocol.<br>
 		HIIT provides both aerobic and anaerobic conditioning, meaning it improves your cardio and your strength in one workout.
 		</p>
 	
-		<p>The exercises, muscle groups and equipment databases can be added to on the website.</p> 
+		<p>The workout dropdown above contains lists of exercises, muscle and equipment that can be added to via forms.</p> 
 		
 		<p>
 		The history page provides a view of all exercises completed and their respective metrics.<br>
 		The routine page allows a user to build a list of exercises and track the reps, sets and weights used.<br>
 		</p>
-		
+
+    	<H4>Future Stuff</H4>
+      
 		<p>
 		The data stored will eventually be used to understand potential imbalances for anterior/posterior chains and muscle groups.<br>
-		It will also include a working calendar (below), an inhouse timer to help with managing workouts.
+		It will also include a working calendar (concept below) and an inhouse timer to help with managing workouts.
 		</p>
 		</center>
-  </div>
+
+{% if session["user_id"] %}		
+</div>
 	<div class="section">
 		<div class="calendar">
 			<div class="calendar__month">
@@ -102,49 +108,8 @@
 			</div>
 		</div>
 	</div>
-
-	<div class="section">
-
-		<h2>Last 4 Exercises</h2>
-
-		<!--
-			This should be the workout databse, that shows the workouts done with a breakdown of which exercises 
-			Would like to eventually use collapsible table example here: https://codepen.io/n3k1t/pen/OJMGgyq 
-		-->
-
-		<table id="table-history">
-			<thead>
-			<tr>
-				<th class="table-date">Date</th>
-				<th class="table-exercise th-left">Exercise</th>
-				<th class="table-variation th-left">Variation</th>
-				<th class="table-antirotation th-left">Antirotation</th>
-				<th class="table-equipment th-left">Equipment</th>
-				<th class="table-sets">Sets</th>
-				<th class="table-reps">Reps</th>
-				<th class="table-weight">Weight</th>
-				<th class="table-notes th-left">Notes</th>
-			</tr>
-			</thead>
-			<tbody>
-			<!-- Loop through the exercise database entries to display them in this table -->
-			{% for routine in routines %}
-			<tr>
-				<td class="table-date add-break">{{ routine.date }}</td>
-				<td class="table-exercise">{{ routine.exercise }}</td>
-				<td class="table-variation">{{ routine.variation }}</td>
-				<td class="table-antirotation">{{ routine.antirotation }}</td>
-				<td class="table-equipment">{{ routine.equipment }}</td>
-				<td class="table-sets">{{ routine.sets }}</td>
-				<td class="table-reps">{{ routine.reps }}</td>
-				<td class="table-weight">{{ routine.weight }}</td>
-				<td class="table-notes">{{ routine.notes }}</td>
-			</tr>
-			{% endfor %}
-			</tbody>
-		</table>
-	</div>
 </div>
+{% endif %}
 
 <script type="text/javascript" src="{{ url_for('static', filename = 'calendar.js') }}"></script>
 

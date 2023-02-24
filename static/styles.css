@@ -31,36 +31,77 @@ a {
 }
 
 header {
+  padding-bottom: 8px;
   border-bottom: 1px solid black; 
   margin-bottom:10px;
-  padding-bottom: 10px;
+  margin-top:10px;
   position: fixed;
   top: 0;
   width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .header-home {
   float: left;
   padding-left: 10px;
+  margin-left: 40px;
 }
 
 .header-menu {
   float: right;
   padding-right: 10px;
-  margin-right: 50px;
+  margin-right: 40px;
 }
+
+.divider {
+  width: 10px;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  text-align:left;
+  padding: 10px;
+  border: 10px;
+  margin: 0px;
+  background-color: white;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown-content a {
+  padding: 10px;
+  line-height: 27px;
+}
+
+.dropdown-content a:hover {
+  color: #93c47d;
+}
+
+.show {display: block;}
 
 .container {
   margin-bottom: 50px;
   padding-bottom: 10px;
   position: fixed;
-  width: 99%;
+  width: 100%;
   overflow: auto;
-  top: 30px;
+  top: 40px;
   bottom: 0px;
+  z-index: -1;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .section {
+  padding: 5px;
   margin-left: auto;
   margin-right: auto;
   width: fit-content;
@@ -71,29 +112,45 @@ header {
   border-bottom: 1px solid black;
 }
 
-
 .data {
   background-color: white;
 }
 
 footer {
   border-top: 1px solid black; 
-  margin-top: 10px;
-  padding: 10px;
+  margin: 10px 0px 0px;
+  padding: 10px 0px;
   text-align: center;
   position: fixed;
   bottom: 0;
   width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.plain-nav {
+  font-size: 16px;
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+.plain-nav:hover {
+  color: #93c47d;
 }
 
 .round-nav {
   border: 1px solid black;
   border-radius: 12px;
   padding: 0.01em 16px;
+  background-color: white;
+}
+.round-nav:hover {
+  background-color: #93c47d;
 }
 
 select {
-  background-color: #d9ead3;
+  background-color: #93c47d;
   color: black;
   border: 1px solid black;
   border-radius: 12px;
@@ -103,7 +160,7 @@ select {
 }
 
 input {
-  background-color: #fff2cc;
+  background-color: #ffd966;
   color: black;
   border: 1px solid black;
   border-radius: 12px;
@@ -350,7 +407,7 @@ input {
 }
 
 .routine-button:hover {
-  background-color: greenyellow;
+  background-color: #cfe2f3;
 }
 
 #delete-row {
@@ -403,10 +460,15 @@ input[type=number] {
 /* screen sizes with width less than 768 */
 @media only screen and (max-width: 850px) {
   /* For mobile phones: */
+
+  .header-home {
+    margin-left: 20px;
+  }
+
   .header-menu {
     float: right;
-    padding-right: 10px;
-    margin-right: 10px;
+    padding-right: 0px;
+    margin-right: 20px;
   }
   
   footer {
@@ -440,7 +502,7 @@ input[type=number] {
         "an an an eq eq eq"
         "se se re re lb lb"
         "no no no no no no";
-      border-bottom: 1px solid black;
+      /* border-bottom: 1px solid red; */
       margin-right: 10px;
     }
   
@@ -466,14 +528,6 @@ input[type=number] {
   #add-row {
     margin-right:10px;
     background-color: #cfe2f3;
-  }
-
-  select {
-    background-color: #93c47d;
-  }
-
-  input {
-    background-color: #ffd966;
   }
 
   .routine-head {
