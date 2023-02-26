@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    : Account
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+  <div class="section data">
+    <h2>
+      <a href="{{ url_for('history') }}">History</a> | 
+      <a style="text-decoration: underline;" href="{{ url_for('calendar') }}">Calendar</a>
+  </h2>
+    <table class="vertical-calendar">
+      <thead>
+        <tr>
+          {% for month_year in vertical_calendar %}
+            <th>{{ month_year[:3] }}</th>
+          {% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for day in range(1,32) %}
+          <tr>
+            {% for month_year, days in vertical_calendar.items() %}
+              {% if day in days %}
+                {% if days[day] == "" %}
+                  <td style="background-color:tomato;">{{ day }}</td>
+                {% else %}
+                  <td>{{ day }} - {{ days[day] }}</td>
+                {% endif %}
+              {% else %}
+                <td></td>
+              {% endif %}
+            {% endfor %}
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

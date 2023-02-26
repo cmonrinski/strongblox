@@ -270,6 +270,34 @@ input {
   color: #111;
 }
 
+/* Vertical Calendar */
+.vertical-calendar th, .vertical-calendar td {
+  padding: 0px 10px;
+  margin: 0px 10px;
+  width: 45px;
+  border-bottom: 1px solid black;
+}
+
+/* About page */
+.about-table td {
+  padding: 3px;
+}
+
+.active {
+  text-align: center;
+  border: 1px solid black;
+  background-color: green;
+  width: 160px;
+}
+
+.rest {
+  text-align: center;
+  border: 1px solid black;
+  background-color: tomato;
+  width: 80px;
+
+}
+
 /* Exercise Table */
 #table-exercises th {
   text-align: left;

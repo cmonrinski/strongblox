@@ -30,8 +30,11 @@
                         <div class="dropdown">
                             <button onclick="accountDropdown()" class="plain-nav" id="accountButton">{{ session["username"] }}</button>
                             <div id="accountData" class="dropdown-content">
+                                <a href="{{ url_for('about') }}">about</a>
                                 <a href="{{ url_for('account') }}">account</a>
+                                <a href="{{ url_for('calendar') }}">calendar</a>
                                 <a href="{{ url_for('data') }}">data</a>
+                                <a href="{{ url_for('history') }}">history</a>
                                 <a href="{{ url_for('logout') }}">logout</a>
                             </div>
                         </div>
@@ -64,15 +67,15 @@
             {% endif %}
         {% endwith %}
         
-        {% block body %}{% endblock %}
+        {% block body %}
+        
+        {% endblock %}
         
         {% if session["user_id"] %}
         <footer>
                 <nav class="nav-footer">
                     <a class="round-nav" href="{{ url_for('routine') }}">routine</a>
-                    <a class="round-nav" href="{{ url_for('history') }}">history</a>
                     <a class="round-nav" href="{{ url_for('timer') }}">timer</a>
-                    <a class="round-nav" href="{{ url_for('data') }}">data</a>
                 </nav>    
         </footer>
         {% endif %}

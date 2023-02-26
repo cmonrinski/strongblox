@@ -1,10 +1,12 @@
 # create a web app that can create and record workout routines
 import sqlite3
+import calendar
 from datetime import datetime
 from flask import Flask, flash, redirect, render_template, request, session
 from flask_session import Session
 from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
+from helpers import get_calendar
 
 
 # Configure application
@@ -167,6 +169,7 @@ def routine():
         time = datetime.today().strftime("%H:%M")
 
         workout = []
+        routine_count = 0
 
         for i in range(0, len(form_data), 8):
             routine = list(form_data.values())[i:i+8]
@@ -181,16 +184,19 @@ def routine():
             reps = routine[5]
             weight = routine[6]
             notes = routine[7]
+            routine_count += 1
 
-            # Remember routine to database
+            # Remember routine to database and commit changes for each routine
             db = sqlite3.connect("workouts.db")
             cur = db.cursor()
-            cur.execute("INSERT INTO routine (date, time, exercise, variation, antirotation, equipment, sets, reps, weight, notes, user_id) \
+            cur.execute("INSERT INTO routines (date, time, exercise, variation, antirotation, equipment, sets, reps, weight, notes, user_id) \
                 VALUES(?,?,?,?,?,?,?,?,?,?,?)", 
                 (date, time, exercise, variation, antiroation, equipment, sets, reps, weight, notes, session["user_id"]))
-
-            # Commit changes and close connection
             db.commit()
+        
+        # Remember workout date and number of routines performed
+        cur.execute("INSERT INTO workouts (date, time, routine_count, user_id) VALUES(?,?,?,?)", (date, time, routine_count, session["user_id"]))
+        db.commit()
         db.close()
 
         return redirect("/success")
@@ -219,7 +225,7 @@ def routine():
 
         # Get routine history to provide placeholders with dynamic data in routine table setup
         # Provides list of tuple e.g.: [(exercise, variation, ..., notes), (exercise, varaition, ..., notes)]
-        cur.execute("SELECT exercise, variation, antirotation, equipment, sets, reps, weight, notes FROM routine \
+        cur.execute("SELECT exercise, variation, antirotation, equipment, sets, reps, weight, notes FROM routines \
             WHERE user_id IS NULL OR user_id = ? ORDER BY routine_id DESC", (session["user_id"],))
         routine_history = cur.fetchall()
 
@@ -236,7 +242,7 @@ def history():
     cur = db.cursor()
 
     # Display all routines in database from SQLite on history.html
-    cur.execute("SELECT * FROM routine WHERE user_id IS NULL OR user_id = ? ORDER BY routine_id DESC", (session["user_id"],))
+    cur.execute("SELECT * FROM routines WHERE user_id IS NULL OR user_id = ? ORDER BY routine_id DESC", (session["user_id"],))
     routines = cur.fetchall()
 
     return render_template("history.html", routines=routines)
@@ -260,6 +266,43 @@ def success():
 def data():
 
     return render_template("data.html")
+
+
+@app.route("/calendar")
+@login_required
+def calendar():
+
+    # Get dates of workouts and number of routines
+    db = sqlite3.connect("workouts.db")
+    db.row_factory = sqlite3.Row
+    cur = db.cursor()
+    cur.execute("SELECT date, SUM(routine_count) FROM workouts WHERE user_id = ? GROUP BY date", (session["user_id"],))
+    rows = cur.fetchall()
+
+    # Store dates as dict of lists {"date": ["year", "month", "day", "num_routines"]}
+    workout_dates = {}
+
+    for row in rows:
+        date = row[0]
+        year = date[8:]
+        day = date[4:6]
+        month = date[:3]
+        num_routines = row[1]
+        workout_dates[date] = [year, month, day, num_routines]
+        
+    # Get calendar from helper file
+    vertical_calendar = get_calendar()
+
+    # Insert workout routine count into calendar on days workouted out
+    for key in workout_dates.keys():
+        year, month, day, val = workout_dates[key]
+        day = int(day)
+        month_year = month + " " + year
+
+        if month_year in vertical_calendar.keys():
+            vertical_calendar[month_year][day] = val
+
+    return render_template("calendar.html", vertical_calendar=vertical_calendar)
 
 
 @app.route("/account")
@@ -408,6 +451,10 @@ def logout():
     # Redirect user to login form
     return redirect("/")
 
+@app.route("/about")
+def about():
+
+    return render_template("about.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
