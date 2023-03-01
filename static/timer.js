@@ -16,7 +16,6 @@ window.onload = function() {
     var recoveryTime = 120;
     var metronomeTime = 1;
 
-    
     // Default settings
     var seconds = preActivityTime;
     var timerOn = false;
