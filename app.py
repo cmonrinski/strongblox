@@ -14,8 +14,9 @@ app = Flask(__name__)
 app.secret_key = "dev"
 
 # Configure session to use filesystem (instead of signed cookies)
-app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_PERMANENT"] = True
 app.config["SESSION_TYPE"] = "filesystem"
+app.config["SESSION_COOKIE_SAMESITE"] = "lax"
 Session(app)
 
 # Connect SQLite to database
@@ -430,10 +431,6 @@ def login():
             session["username"] = rows[0][1]
             session["email"] = rows[0][3]
 
-            print(session["user_id"])
-            print(session["username"])
-            print(session["email"])
-
             return redirect("/")
 
     # User reached route via GET (as by clicking a link or via redirect)
@@ -451,10 +448,12 @@ def logout():
     # Redirect user to login form
     return redirect("/")
 
+
 @app.route("/about")
 def about():
 
     return render_template("about.html")
+
 
 if __name__ == "__main__":
     app.run(debug=True)

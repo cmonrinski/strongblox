@@ -169,6 +169,30 @@ input {
   margin-bottom: 5px;
 }
 
+/* Timer */
+.timer-widget {
+  text-align: center;
+}
+
+.timer input {
+  width: 110px;
+  text-align: center;
+}
+
+#end-button {
+  margin-top: 10px;
+}
+
+.slider span {
+  width: 50px;
+}
+
+.timer-toggle-container {
+  width: 200px;
+  text-align: left;
+  margin: 10px auto;
+}
+
 /* Calendar */
 .calendar {
   width: 350px;
@@ -447,7 +471,7 @@ input {
   display: flex;
 }
 
-span {
+.item1 span {
   display: inline-block;
   width: 25px;
   text-align: center;

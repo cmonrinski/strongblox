@@ -6,69 +6,54 @@
 
     <div class="container">
         <div class="section">
-
-            <h2>Timer Widget</h2>
-            <p></p>
-            <div class="notes">
-                <ul>
-                    <li>Uninterrupted Time</li>
-                    <li>Interval Time</li>
-                    <ul>
-                        <li>active time</li>
-                        <li>rest time</li>
-                        <li>repeats</li>
-                        <li>beeps when time is less than __ seconds</li>
-                    </ul>
-                </ul>
-            </div>
-        </div>
-        <div class="section">
-
-            <h2>Metronome Widget</h2>
-            <p></p>
-            <div class="notes">
-                <ul>
-                    <li>tick every __ second</li>
-                    <li>toggle switch</li>
-                </ul>
-            </div>
-        </div>
-        <div class="section">
-            <h2>Set Up Timer</h2>
-
-            <p>This timer widget can sit on the routine page so the user can run an entire workout from one page</p>
-            
-            <form method="get">
+            <h2>Tabata Timer</h2>
+            <div class="timer-widget">
                 <div class="timer">
-                    <input autocomplete="off" autofocus name="pre-activity" placeholder="Pre-Activity Time" type="number">
-                    <input autocomplete="off" autofocus name="activity" placeholder="Activity Time" type="number">
-                    <input autocomplete="off" autofocus name="rest" placeholder="Rest Time" type="number">
-                    <input autocomplete="off" autofocus name="rounds" placeholder="Rounds" type="number">
-                    <input autocomplete="off" autofocus name="recovery" placeholder="Recovery" type="number">
-                    <input autocomplete="off" autofocus name="metronome" placeholder="Metronome" type="number">
+                    <input autocomplete="off" autofocus name="pre-activity" id="pre-activity" placeholder="Pre-Activity Time" type="number">
+                    <input autocomplete="off" autofocus name="activity" id="activity" placeholder="Activity Time" type="number">
+                    <input autocomplete="off" autofocus name="rest" id="rest" placeholder="Rest Time" type="number">
+                    <input autocomplete="off" autofocus name="cycles-goal" id="cycles-goal" placeholder="Cycles" type="number">
+                    <input autocomplete="off" autofocus name="routines-goal" id="routines-goal" placeholder="Routines" type="number">
+                    <input autocomplete="off" autofocus name="recovery" id="recovery" placeholder="Recovery" type="number">
+                    <input autocomplete="off" autofocus name="metronome" id="metronome" placeholder="Metronome" type="number">
+                    <button class="round-nav"  id="update">Update</button>
+                </div>
+                <div>
+                    <h2 id="status-view">Hello</h2>
+                    <h3 id="seconds-view">-</h3 >
+                    <h4 id="cycles-view">Cycles:</h4>
+                    <h4 id="routines-view">Routines:</h4>
                 </div>
                 <div class="timer_action">
-                    <input type="submit" value="Start">
-                    <input type="submit" value="Pause">
-                    <input type="submit" value="End">
+                    <button class="round-nav" id="start-button">Start</button>
+                    <button class="round-nav" id="pause-button">Pause</button>
                 </div>
-                <div class="timer_features">
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" role="switch" id="interval_beep">
-                        <label class="form-check-label" for="interval_beep">Interval Beep</label>
+                <div  class="timer_action">
+                    <button class="round-nav" id="end-button">End</button>
+                </div>
+                <div class="timer-toggle-container">
+                    <div class="timer-toggle">
+                        <input type="checkbox" id="change-whistle" checked>
+                        <span class="slider">Whistle on Change</span>
                     </div>
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" role="switch" id="leading_beep">
-                        <label class="form-check-label" for="leading_beep">Leading Beep</label>
+                    <div class="timer-toggle">
+                        <input type="checkbox" id="change-vibrate" checked>
+                        <span class="slider">Vibrate on Change</span>
                     </div>
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" role="switch" id="metronome_beep">
-                        <label class="form-check-label" for="metronome_beep">Metronome Beep</label>
+                    <div class="timer-toggle">
+                        <input type="checkbox" id="leading-clicks" checked>
+                        <span class="slider">Leading Clicks</span>
+                    </div>
+                    <div class="timer-toggle">
+                        <input type="checkbox" id="metronome-tocks">
+                        <span class="slider">Metronome Tocks</span>
                     </div>
                 </div>
-            </form>
-            
+            </div>
         </div>
-    </div>
+ </div>
+
+    
+    <script type="text/javascript" src="{{ url_for('static', filename = 'timer.js') }}"></script>
 
 {% endblock %}
