@@ -54,16 +54,16 @@ def after_request(response):
 @app.route("/")
 def index():
 
-        # Get dates of workouts and number of routines
+    # Get dates of workouts and number of routines
     db = sqlite3.connect("workouts.db")
     db.row_factory = sqlite3.Row
     cur = db.cursor()
     cur.execute("SELECT date, SUM(routine_count) FROM workouts WHERE user_id = ? GROUP BY date", (session["user_id"],))
     rows = cur.fetchall()
 
-    # Store dates as dict of lists {"date": ["year", "month", "day", "num_routines"]}
     workout_dates = {}
 
+    # Store dates as dict of lists {"date": ["year", "month", "day", "num_routines"]}
     for row in rows:
         date = row[0]
         year = date[8:]
@@ -83,6 +83,7 @@ def index():
 
         if month_year in vertical_calendar.keys():
             vertical_calendar[month_year][day] = val
+
 
     return render_template("index.html", vertical_calendar=vertical_calendar)
 
