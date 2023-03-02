@@ -17,7 +17,7 @@
 		</div>
 	</div>
 
-	{% if session["user_id"] %}		
+{% if session["user_id"] %}
 
 	<div class="section">
 		<table class="vertical-calendar">
@@ -47,7 +47,6 @@
 			</tbody>
 		</table>
 	</div>
-	{% endif %}
 </div>
 
 <script type="text/javascript">
@@ -70,5 +69,7 @@
 	});
 	}
 </script>
+
+{% endif %}
 
 {% endblock %}

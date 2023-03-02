@@ -53,38 +53,45 @@ def after_request(response):
 @app.route("/")
 def index():
 
-    # Get dates of workouts and number of routines
-    db = sqlite3.connect("workouts.db")
-    db.row_factory = sqlite3.Row
-    cur = db.cursor()
-    cur.execute("SELECT date, SUM(routine_count) FROM workouts WHERE user_id = ? GROUP BY date", (session["user_id"],))
-    rows = cur.fetchall()
+    user_id = session.get("user_id")
 
-    workout_dates = {}
+    if user_id is None:
 
-    # Store dates as dict of lists {"date": ["year", "month", "day", "num_routines"]}
-    for row in rows:
-        date = row[0]
-        year = date[8:]
-        day = date[4:6]
-        month = date[:3]
-        num_routines = row[1]
-        workout_dates[date] = [year, month, day, num_routines]
-        
-    # Get calendar from helper file
-    vertical_calendar = get_calendar()
+        return render_template("index.html")
+    
+    else:
 
-    # Insert workout routine count into calendar on days workouted out
-    for key in workout_dates.keys():
-        year, month, day, val = workout_dates[key]
-        day = int(day)
-        month_year = month + " " + year
+        # Get dates of workouts and number of routines
+        db = sqlite3.connect("workouts.db")
+        db.row_factory = sqlite3.Row
+        cur = db.cursor()
+        cur.execute("SELECT date, SUM(routine_count) FROM workouts WHERE user_id = ? GROUP BY date", (session["user_id"],))
+        rows = cur.fetchall()
 
-        if month_year in vertical_calendar.keys():
-            vertical_calendar[month_year][day] = val
+        workout_dates = {}
 
+        # Store dates as dict of lists {"date": ["year", "month", "day", "num_routines"]}
+        for row in rows:
+            date = row[0]
+            year = date[8:]
+            day = date[4:6]
+            month = date[:3]
+            num_routines = row[1]
+            workout_dates[date] = [year, month, day, num_routines]
+            
+        # Get calendar from helper file
+        vertical_calendar = get_calendar()
 
-    return render_template("index.html", vertical_calendar=vertical_calendar)
+        # Insert workout routine count into calendar on days workouted out
+        for key in workout_dates.keys():
+            year, month, day, val = workout_dates[key]
+            day = int(day)
+            month_year = month + " " + year
+
+            if month_year in vertical_calendar.keys():
+                vertical_calendar[month_year][day] = val
+
+        return render_template("index.html", vertical_calendar=vertical_calendar)
 
 
 @app.route("/equipment", methods=["GET", "POST"])
