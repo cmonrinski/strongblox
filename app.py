@@ -1,6 +1,5 @@
 # create a web app that can create and record workout routines
 import sqlite3
-import calendar
 from datetime import datetime
 from flask import Flask, flash, redirect, render_template, request, session
 from flask_session import Session
