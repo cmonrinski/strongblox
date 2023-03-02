@@ -6,116 +6,69 @@
 
 {% block body %}
 
-<!-- Consider using vertical calendar in the future -->
-
 <div class="container" >
 	<div class="section">
-		<H2>Welcome!</H2>
-		<center>
-		<p>
-		This is a workout tracker, based around high-intensity workouts, specifically the <a href="https://jps.biomedcentral.com/articles/10.1007/s12576-019-00676-7"><b><font color="#6fa8dc">Tabata</font></b></a> protocol.<br>
-		HIIT provides both aerobic and anaerobic conditioning, meaning it improves your cardio and your strength in one workout.
-		</p>
-	
-		<p>The workout dropdown above contains lists of exercises, muscle and equipment that can be added to via forms.</p> 
-		
-		<p>
-		The history page provides a view of all exercises completed and their respective metrics.<br>
-		The routine page allows a user to build a list of exercises and track the reps, sets and weights used.<br>
-		</p>
-
-    	<H4>Future Stuff</H4>
-      
-		<p>
-		The data stored will eventually be used to understand potential imbalances for anterior/posterior chains and muscle groups.<br>
-		It will also include a working calendar (concept below) and an inhouse timer to help with managing workouts.
-		</p>
-		</center>
-
-{% if session["user_id"] %}		
-</div>
-	<div class="section">
-		<div class="calendar">
-			<div class="calendar__month">
-			<div class="cal-month__previous"><</div>
-			<div class="cal-month__current"></div>
-			<div class="cal-month__next">></div>
-			</div>
-			<div class="calendar__head">
-			<div class="cal-head__day"></div>
-			<div class="cal-head__day"></div>
-			<div class="cal-head__day"></div>
-			<div class="cal-head__day"></div>
-			<div class="cal-head__day"></div>
-			<div class="cal-head__day"></div>
-			<div class="cal-head__day"></div>
-			</div>
-			<div class="calendar__body">
-			<div class="cal-body__week">
-				<div class="cal-body__day"></div>
-				<div class="cal-body__day"></div>
-				<div class="cal-body__day"></div>
-				<div class="cal-body__day"></div>
-				<div class="cal-body__day"></div>
-				<div class="cal-body__day"></div>
-				<div class="cal-body__day"></div>
-			</div>
-			<div class="cal-body__week">
-				<div class="cal-body__day"></div>
-				<div class="cal-body__day"></div>
-				<div class="cal-body__day"></div>
-				<div class="cal-body__day"></div>
-				<div class="cal-body__day"></div>
-				<div class="cal-body__day"></div>
-				<div class="cal-body__day"></div>
-			</div>
-			<div class="cal-body__week">
-				<div class="cal-body__day"></div>
-				<div class="cal-body__day"></div>
-				<div class="cal-body__day"></div>
-				<div class="cal-body__day"></div>
-				<div class="cal-body__day"></div>
-				<div class="cal-body__day"></div>
-				<div class="cal-body__day"></div>
-			</div>
-			<div class="cal-body__week">
-				<div class="cal-body__day"></div>
-				<div class="cal-body__day"></div>
-				<div class="cal-body__day"></div>
-				<div class="cal-body__day"></div>
-				<div class="cal-body__day"></div>
-				<div class="cal-body__day"></div>
-				<div class="cal-body__day"></div>
-			</div>
-			<div class="cal-body__week">
-				<div class="cal-body__day"></div>
-				<div class="cal-body__day"></div>
-				<div class="cal-body__day"></div>
-				<div class="cal-body__day"></div>
-				<div class="cal-body__day"></div>
-				<div class="cal-body__day"></div>
-				<div class="cal-body__day"></div>
-			</div>
-			<div class="cal-body__week">
-				<div class="cal-body__day"></div>
-				<div class="cal-body__day"></div>
-				<div class="cal-body__day"></div>
-				<div class="cal-body__day"></div>
-				<div class="cal-body__day"></div>
-				<div class="cal-body__day"></div>
-				<div class="cal-body__day"></div>
-			</div>
-			</div>
+		<button class="accordion"><h2>Welcome!</h2></button>
+		<div class="panel">
+			<p>
+			This is a workout tracker, based around high-intensity workouts, specifically the <a href="https://jps.biomedcentral.com/articles/10.1007/s12576-019-00676-7"><b><font color="#6fa8dc">Tabata</font></b></a> protocol.<br><br>
+			HIIT provides both aerobic and anaerobic conditioning, meaning it improves your cardio and your strength in one workout.
+			</p>
 		</div>
 	</div>
-</div>
-{% endif %}
 
-<script type="text/javascript" src="{{ url_for('static', filename = 'calendar.js') }}"></script>
+	{% if session["user_id"] %}		
+
+	<div class="section">
+		<table class="vertical-calendar">
+			<thead>
+				<tr>
+				{% for month_year in vertical_calendar %}
+					<th>{{ month_year[:3] }}</th>
+				{% endfor %}
+				</tr>
+			</thead>
+			<tbody>
+				{% for day in range(1,32) %}
+				<tr>
+					{% for month_year, days in vertical_calendar.items() %}
+					{% if day in days %}
+						{% if days[day] == "" %}
+						<td style="background-color:tomato;">{{ day }}</td>
+						{% else %}
+						<td>{{ day }} - {{ days[day] }}</td>
+						{% endif %}
+					{% else %}
+						<td></td>
+					{% endif %}
+					{% endfor %}
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+	{% endif %}
+</div>
 
 <script type="text/javascript">
-	let addBreak = document.querySelectorAll(".add-break");
-	addBreak.forEach(element => element.innerHTML = element.innerHTML.replace(/,/g, "<br>"));        
+	var acc = document.getElementsByClassName("accordion");
+	var i;
+
+	for (i = 0; i < acc.length; i++) {
+	acc[i].addEventListener("click", function() {
+		/* Toggle between adding and removing the "active" class,
+		to highlight the button that controls the panel */
+		this.classList.toggle("highlight");
+
+		/* Toggle between hiding and showing the active panel */
+		var panel = this.nextElementSibling;
+		if (panel.style.display === "block") {
+		panel.style.display = "none";
+		} else {
+		panel.style.display = "block";
+		}
+	});
+	}
 </script>
 
 {% endblock %}

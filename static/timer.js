@@ -4,8 +4,8 @@ window.onload = function() {
     var whistle = new Audio("static/audio/whistle.wav");    // For start of any change to timer
     var click = new Audio("static/audio/click.wav");        // 3 second countdown
     var gong = new Audio("static/audio/gong.wav");          // For completion
-    var tock = new Audio("static/audio/tock.wav");          // potential for metronome
-    var blop = new Audio("static/audio/blop.wav");          // I like this best for metronome
+    var tick = new Audio("static/audio/tick.wav");          // Metronome tick for metronome
+    var tock = new Audio("static/audio/tock.wav");          // Metronome tock for half metronome time set
     
     // Preset values for Tabata Timer
     var preActivityTime = 10;
@@ -62,6 +62,7 @@ window.onload = function() {
     cyclesView.innerText = "Cycles: " + cyclesCount + " / " + cyclesGoal;
     routinesView.innerText = "Routines: " + routinesCount + " / " + routinesGoal;
     pauseButton.disabled = true;
+    endButton.disabled = true;
 
     // Update button to change timer's timings
     updateButton.onclick = function() {
@@ -79,6 +80,7 @@ window.onload = function() {
         timerOn = true;
         startButton.disabled = true;
         pauseButton.disabled = false;
+        endButton.disabled = false;
         timerDetail = "pre";
         seconds = seconds - 1;
         interval = setInterval(countdownSeconds, 1000);
@@ -110,6 +112,8 @@ window.onload = function() {
     endButton.onclick = function() {
         timerOn = false;
         startButton.disabled = false;
+        pauseButton.disabled = true;
+        endButton.disabled = true;
         timerDetail = "reset";
         clearInterval(interval);
         secondsView.innerText = "-";
