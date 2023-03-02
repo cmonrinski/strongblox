@@ -1,7 +1,7 @@
 # create a web app that can create and record workout routines
 import sqlite3
 from datetime import datetime
-from flask import Flask, flash, redirect, render_template, request, session
+from flask import Flask, redirect, render_template, request, session
 from flask_session import Session
 from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
@@ -416,7 +416,6 @@ def register():
         db.commit()
         db.close()
 
-        flash("You registered, which is great!  Sorry, but I haven't figured out how to register and automatically log in, so you'll need to login now.  I'll get better soon!")
         return redirect("/login")
 
     # User reached route via GET (as by clicking or via redirect)

@@ -17,6 +17,7 @@ light: #fff2cc
 */
 
 /* layout */
+
 * {
   font-family: 'Trebuchet MS', sans-serif;
 }
@@ -34,35 +35,58 @@ p {
 
 a {
   text-decoration: none;
-  color: #000;
+  color: black;
 }
 
+/* Navigation Bar */
 header {
-  padding-bottom: 8px;
+  padding: 8px;
   border-bottom: 1px solid black; 
-  margin-bottom:10px;
-  margin-top:10px;
-  position: fixed;
+  position:fixed;
   top: 0;
   width: 100%;
   left: 50%;
   transform: translateX(-50%);
+  background-color: #d9ead3;
 }
 
-.header-home {
+.nav-bar {
+  list-style-type: none;
+  margin: 0;
+  padding: 0px 10px;
+  overflow:visible;
+}
+
+.nav-bar li {
+  display: inline;
+}
+
+.nav-left {
   float: left;
-  padding-left: 10px;
-  margin-left: 40px;
 }
 
-.header-menu {
+.nav-right {
   float: right;
-  padding-right: 10px;
-  margin-right: 40px;
 }
 
 .divider {
-  width: 10px;
+  padding: 0px 10px;
+}
+
+.nav-bar a:hover {
+  color: #93c47d;
+}
+
+/* Dropdown menu in navigation bar */
+.dropdown-button {
+  font-size: 16px;
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+.dropdown-button:hover {
+  color: #93c47d;
 }
 
 .dropdown {
@@ -81,6 +105,7 @@ header {
   margin: 0px;
   background-color: white;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  border-radius: 12px;
 }
 
 .dropdown-content a {
@@ -92,10 +117,13 @@ header {
   color: #93c47d;
 }
 
-.show {display: block;}
+.show {
+  display: block;
+}
 
+/* General page layout */
 .container {
-  margin-bottom: 50px;
+  margin-bottom: 0px;
   padding-bottom: 10px;
   position: fixed;
   width: 100%;
@@ -548,20 +576,6 @@ input[type=number] {
 /* screen sizes with width less than 768 */
 @media only screen and (max-width: 850px) {
   /* For mobile phones: */
-
-  .header-home {
-    margin-left: 20px;
-  }
-
-  .header-menu {
-    float: right;
-    padding-right: 0px;
-    margin-right: 20px;
-  }
-  
-  footer {
-    text-align: center;
-  }
 
   /* Routine page layout on mobiel */
 
