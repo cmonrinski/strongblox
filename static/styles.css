@@ -327,6 +327,27 @@ input {
   background-color: #9fc5e8;
 }
 
+#table-exercises .accordion {
+  color: black;
+  font-size: 16px;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 0px;
+  width: 100%;
+  text-align: left; 
+  border: none;
+  outline: none;
+  transition: 0.4s;
+}
+
+/* Style the accordion panel. Note: hidden by default */
+#table-exercises .panel {
+  padding: 0 18px;
+  background-color: transparent;
+  display: none;
+  overflow: hidden;
+}
+
 /* Equipement Table */
 
 #table-equipment {
@@ -414,11 +435,6 @@ input {
   border: none;
   outline: none;
   transition: 0.4s;
-}
-
-/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-#table-history .highlight {
-  background-color: #6fa8dc;
 }
 
 /* Style the accordion panel. Note: hidden by default */

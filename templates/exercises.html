@@ -48,9 +48,13 @@
                     {% for exercise in exercises %}
                         <tr>
                             <td>
-                                <span class="parent">{{ exercise.exercise }} - {{ exercise.variation }}</span><br>
-                                <span class="child">Muscle: {{ exercise.muscle }} </span><br>
-                                <span class="child">Chain: {{ exercise.chain }}</span>
+                                <button class="accordion">
+                                    <span class="parent">{{ exercise.exercise }} - {{ exercise.variation }}</span><br>
+                                </button>
+                                <div class="panel">
+                                    <span class="child">Muscle: {{ exercise.muscle }} </span><br>
+                                    <span class="child">Chain: {{ exercise.chain }}</span>
+                                </div>
                             </td>
                         </tr>
                     {% endfor %}
@@ -58,4 +62,21 @@
             </table>
         </div>
     </div>
+
+    <script type="text/javascript">
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+    
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {    
+                /* Toggle between hiding and showing the active panel */
+                var panel = this.nextElementSibling;
+                if (panel.style.display === "block") {
+                    panel.style.display = "none";
+                    } else {
+                    panel.style.display = "block";
+                    }
+            });
+        }
+    </script>
 {% endblock %}
