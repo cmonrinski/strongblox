@@ -21,28 +21,19 @@
 
         <!-- Display a list of all muscles -->
         <div class="section data">
-
-            <h2>Muscles</h2>
-            
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
+            <table id="table-muscles">
+                <div class="sticky">  
+                    <p class="history-calendar">Muscles</p>
+                </div>
+                <tbody>
+                    <!-- Loop through the equipment database entries to display them in this table -->
+                    {% for muscle in muscles %}
                         <tr>
-                            <th>#</th>
-                            <th>Muscle</th>
+                            <td>{{ muscle.muscle }}</td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Loop through the equipment database entries to display them in this table -->
-                        {% for muscle in muscles %}
-                            <tr>
-                                <td>{{ muscle.muscle_id }}</td>
-                                <td>{{ muscle.muscle }}</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>      
+                    {% endfor %}
+                </tbody>
+            </table>  
 
         </div>
             

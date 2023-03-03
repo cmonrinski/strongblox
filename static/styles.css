@@ -211,7 +211,6 @@ input {
 /* Style the buttons that are used to open and close the accordion panel */
 .accordion {
   background-color: white;
-  color: #444;
   cursor: pointer;
   padding: 0px;
   width: 100%;
@@ -223,7 +222,7 @@ input {
 
 /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
 .highlight {
-  background-color: #d9ead3;
+  background-color: #6fa8dc;
 }
 
 /* Style the accordion panel. Note: hidden by default */
@@ -262,7 +261,6 @@ input {
 .sticky {
   position: sticky;
 }
-
 
 /* Vertical Calendar */
 .vertical-calendar th {
@@ -329,6 +327,47 @@ input {
   background-color: #9fc5e8;
 }
 
+/* Equipement Table */
+
+#table-equipment {
+  margin: 10px;
+  width: 90vw;
+  max-width: 400px;
+}
+
+#table-equipment td {
+  line-height: 27px;
+  padding: 10px;
+}
+
+#table-equipment tbody > tr:nth-child(even) {
+  background-color: #cfe2f3;
+}
+
+#table-equipment tbody > tr:nth-child(odd) {
+  background-color: #9fc5e8;
+}
+/* Muscles Table */
+
+#table-muscles {
+  margin: 10px;
+  width: 90vw;
+  max-width: 400px;
+}
+
+#table-muscles td {
+  line-height: 27px;
+  padding: 10px;
+}
+
+#table-muscles tbody > tr:nth-child(even) {
+  background-color: #cfe2f3;
+}
+
+#table-muscles tbody > tr:nth-child(odd) {
+  background-color: #9fc5e8;
+}
+
 /* History Table */
 
 .history-calendar {
@@ -343,6 +382,7 @@ input {
 }
 
 #table-history td {
+  line-height: 27px;
   padding: 10px;
 }
 
@@ -351,7 +391,7 @@ input {
   width: 84px;
 }
 
-#table-history td > span.child {
+#table-history .child {
   padding-left: 30px;
 }
 
@@ -361,6 +401,32 @@ input {
 
 #table-history tbody tr:nth-child(odd) {
   background-color: #cfe2f3;
+}
+
+#table-history .accordion {
+  color: black;
+  font-size: 16px;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 0px;
+  width: 100%;
+  text-align: left; 
+  border: none;
+  outline: none;
+  transition: 0.4s;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+#table-history .highlight {
+  background-color: #6fa8dc;
+}
+
+/* Style the accordion panel. Note: hidden by default */
+#table-history .panel {
+  padding: 0 18px;
+  background-color: transparent;
+  display: none;
+  overflow: hidden;
 }
 
 /* Routine page */

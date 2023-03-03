@@ -21,28 +21,19 @@
 
         <!-- Display a list of all equipment -->
         <div class="section data">
-
-            <h2>Equipment</h2>
-            
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
+            <table id="table-equipment">
+                <div class="sticky">  
+                    <p class="history-calendar">Equipment</p>
+                </div>
+                <tbody>
+                    <!-- Loop through the equipment database entries to display them in this table -->
+                    {% for equipment in equipments %}
                         <tr>
-                            <th>#</th>
-                            <th>Equipment</th>
+                            <td>{{ equipment.equipment }}</td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Loop through the equipment database entries to display them in this table -->
-                        {% for equipment in equipments %}
-                            <tr>
-                                <td>{{ equipment.equipment_id }}</td>
-                                <td>{{ equipment.equipment }}</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>     
+                    {% endfor %}
+                </tbody>
+            </table>
 
         </div>
 

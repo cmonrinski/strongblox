@@ -23,8 +23,8 @@
                         <li class="nav-right dropdown">
                             <button class="dropdown-button" id="account-button" onclick="menuDropdown()">{{ session["username"] }}</button>
                             <div class="dropdown-content" id="account-menu">
-                                <a href="{{ url_for('exercises') }}">exercises</a>
                                 <a href="{{ url_for('equipment') }}">equipment</a>
+                                <a href="{{ url_for('exercises') }}">exercises</a>
                                 <a class="dropdown-divider" href="{{ url_for('muscles') }}">muscles</a>
                                 <a href="{{ url_for('calendar') }}">calendar</a>
                                 <a href="{{ url_for('history') }}">history</a>

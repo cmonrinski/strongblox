@@ -39,9 +39,10 @@
 
         <!-- Display a list of all exercises -->
         <div class="section data">
-
             <table id="table-exercises">
-                <p class="history-calendar">Exercises</p>
+                <div class="sticky">  
+                    <p class="history-calendar">Exercises</p>
+                </div>
                 <tbody>
                     <!-- Loop through the exercise database entries to display them in this table -->
                     {% for exercise in exercises %}
