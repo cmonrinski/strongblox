@@ -200,9 +200,9 @@ def muscles():
 @login_required
 def routine():
     if request.method == "POST":
-
+        
+        # Routine data bundled by javascript and sent via JSON
         form_data = request.get_json()
-        print(form_data)
 
         date = datetime.today().strftime("%b %d, %Y")
         time = datetime.today().strftime("%H:%M")
