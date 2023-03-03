@@ -25,12 +25,12 @@
                             <div class="dropdown-content" id="account-menu">
                                 <a href="{{ url_for('exercises') }}">exercises</a>
                                 <a href="{{ url_for('equipment') }}">equipment</a>
-                                <a href="{{ url_for('muscles') }}">muscles</a>
+                                <a class="dropdown-divider" href="{{ url_for('muscles') }}">muscles</a>
+                                <a href="{{ url_for('calendar') }}">calendar</a>
+                                <a href="{{ url_for('history') }}">history</a>
+                                <a class="dropdown-divider" href="{{ url_for('data') }}">data</a>
                                 <a href="{{ url_for('about') }}">about</a>
                                 <a href="{{ url_for('account') }}">account</a>
-                                <a href="{{ url_for('calendar') }}">calendar</a>
-                                <a href="{{ url_for('data') }}">data</a>
-                                <a href="{{ url_for('history') }}">history</a>
                                 <a href="{{ url_for('logout') }}">logout</a>
                             </div>
                         </li>
@@ -40,9 +40,9 @@
                 <nav>
                     <ul class="nav-bar">
                         <li class="nav-left"><a href="{{ url_for('index') }}">StrongBlox</a></li>
-                        <li class="nav-right"><a href="{{ url_for('login') }}">login</a></li>
-                        <li class="nav-right divider">|</li>
                         <li class="nav-right"><a href="{{ url_for('register') }}">register</a></li>
+                        <li class="nav-right divider">|</li>
+                        <li class="nav-right"><a href="{{ url_for('login') }}">login</a></li>
                     </div>
                     </ul>
                 </nav>

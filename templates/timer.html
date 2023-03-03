@@ -9,14 +9,14 @@
             <h2>Tabata Timer</h2>
             <div class="timer-widget">
                 <div class="timer">
-                    <input autocomplete="off" autofocus name="pre-activity" id="pre-activity" placeholder="Pre-Activity Time" type="number">
-                    <input autocomplete="off" autofocus name="activity" id="activity" placeholder="Activity Time" type="number">
-                    <input autocomplete="off" autofocus name="rest" id="rest" placeholder="Rest Time" type="number">
-                    <input autocomplete="off" autofocus name="cycles-goal" id="cycles-goal" placeholder="Cycles" type="number">
-                    <input autocomplete="off" autofocus name="routines-goal" id="routines-goal" placeholder="Routines" type="number">
-                    <input autocomplete="off" autofocus name="recovery" id="recovery" placeholder="Recovery" type="number">
-                    <input autocomplete="off" autofocus name="metronome" id="metronome" placeholder="Metronome" type="number">
-                    <button class="round-nav"  id="update">Update</button>
+                    <input autocomplete="off" name="pre-activity" id="pre-activity" placeholder="Pre-Activity Time" type="number">
+                    <input autocomplete="off" name="activity" id="activity" placeholder="Activity Time" type="number">
+                    <input autocomplete="off" name="rest" id="rest" placeholder="Rest Time" type="number">
+                    <input autocomplete="off" name="cycles-goal" id="cycles-goal" placeholder="Cycles" type="number">
+                    <input autocomplete="off" name="routines-goal" id="routines-goal" placeholder="Routines" type="number">
+                    <input autocomplete="off" name="recovery" id="recovery" placeholder="Recovery" type="number">
+                    <input autocomplete="off" name="metronome" id="metronome" placeholder="Metronome" type="number">
+                    <button class="round-nav" id="update">Update</button>
                 </div>
                 <div>
                     <h2 id="status-view">Hello</h2>
@@ -51,9 +51,8 @@
                 </div>
             </div>
         </div>
- </div>
+    </div>
 
-    
     <script type="text/javascript" src="{{ url_for('static', filename = 'timer.js') }}"></script>
 
 {% endblock %}
