@@ -160,7 +160,7 @@ def exercises():
         muscles = cur.fetchall()
 
         # Display all exercises in database from SQLite on exercises.html
-        cur.execute("SELECT * FROM exercises WHERE user_id IS NULL OR user_id = ?", (session["user_id"],))
+        cur.execute("SELECT * FROM exercises WHERE user_id IS NULL OR user_id = ? ORDER BY exercise", (session["user_id"],))
         exercises = cur.fetchall()
 
         return render_template("exercises.html", exercises=exercises, muscles=muscles, chains=CHAINS, focuses=FOCUSES, antirotations=ANTIROTATIONS)
@@ -202,6 +202,7 @@ def routine():
     if request.method == "POST":
 
         form_data = request.get_json()
+        print(form_data)
 
         date = datetime.today().strftime("%b %d, %Y")
         time = datetime.today().strftime("%H:%M")

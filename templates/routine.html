@@ -6,9 +6,11 @@
             <h2>Routine</h2>
 
             <form action="/routine" method="post" id="routine-form">
-                <input type="submit" class="routine-button" value="Save Routine" id="routine-submit">
-                <input type="button" class="routine-button table-edit" id="delete-row" value="-">
-                <input type="button" class="routine-button table-edit" id="add-row" value="+">
+                <div class="routine-header">
+                    <input type="submit" class="routine-button" value="Save Routine" id="routine-submit">
+                    <input type="button" class="routine-button table-edit" id="delete-row" value="-">
+                    <input type="button" class="routine-button table-edit" id="add-row" value="+">
+                </div>
                 <div class="rows" id="routine-row">
                     <span class="item1" id="count">1</span>
                     <select class="routine workout item2" name="exercise" id="exercise">

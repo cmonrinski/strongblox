@@ -16,32 +16,27 @@
             
             <div>
                 <table id="table-history">
-                    <thead>
-                        <tr>    
-                            <th class="table-date">Date</th>
-                            <th class="table-exercise th-left">Exercise</th>
-                            <th class="table-variation th-left">Variation</th>
-                            <th class="table-antirotation th-left">Antirotation</th>
-                            <th class="table-equipment th-left">Equipment</th>
-                            <th class="table-sets">Sets</th>
-                            <th class="table-reps">Reps</th>
-                            <th class="table-weight">Weight</th>
-                            <th class="table-notes th-left">Notes</th>
-                        </tr>
-                    </thead>
+                    <div class="sticky">  
+                            <p class="history-calendar">Workouts</p>
+                    </div>
                     <tbody>
                         <!-- Loop through the exercise database entries to display them in this table -->
                         {% for routine in routines %}
                             <tr>    
-                                <td class="table-date add-break">{{ routine.date }}</td>
-                                <td class="table-exercise">{{ routine.exercise }}</td>
-                                <td class="table-variation">{{ routine.variation }}</td>
-                                <td class="table-antirotation">{{ routine.antirotation }}</td>
-                                <td class="table-equipment">{{ routine.equipment }}</td>
-                                <td class="table-sets">{{ routine.sets }}</td>
-                                <td class="table-reps">{{ routine.reps }}</td>
-                                <td class="table-weight">{{ routine.weight }}</td>
-                                <td class="table-notes">{{ routine.notes }}</td>
+                                <td>
+                                    <span class="parent">{{ routine.date }}</span><br>
+                                    <span class="parent">{{ routine.exercise }} - {{ routine.variation }} - {{ routine.antirotation }}</span><br>
+                                    <span class="child">Equipment: </span>
+                                    <span>{{ routine.equipment }}</span><br>
+                                    <span class="child uniformity">Sets: </span>
+                                    <span>{{ routine.sets }}</span><br>
+                                    <span class="child uniformity">Reps: </span>
+                                    <span>{{ routine.reps }}</span><br>
+                                    <span class="child uniformity">Lbs: </span>
+                                    <span>{{ routine.weight }}</span><br>
+                                    <span class="child uniformity">Notes: </span>
+                                    <span>{{ routine.notes }}</span>
+                                </td>
                             </tr>
                         {% endfor %}
                     </tbody>
@@ -49,9 +44,4 @@
             </div>
         </div>
     </div>
-
-    <script type="text/javascript">
-        let addBreak = document.querySelectorAll(".add-break");
-        addBreak.forEach(element => element.innerHTML = element.innerHTML.replace(/,/g, "<br>"));        
-    </script>
 {% endblock %}

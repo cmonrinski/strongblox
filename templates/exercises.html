@@ -40,29 +40,17 @@
         <!-- Display a list of all exercises -->
         <div class="section data">
 
-            <h2>Exercises</h2>
-
             <table id="table-exercises">
-                <thead>
-                    <tr>
-                        <th class="table-ex-id">#</th>
-                        <th class="table-ex-name">Name</th>
-                        <th class="table-ex-variation">Variation</th>
-                        <th class="table-ex-focus">Focus</th>
-                        <th class="table-ex-muscle">Muscle</th>
-                        <th class="table-ex-chain">Chain</th>
-                    </tr>
-                </thead>
+                <p class="history-calendar">Exercises</p>
                 <tbody>
                     <!-- Loop through the exercise database entries to display them in this table -->
                     {% for exercise in exercises %}
                         <tr>
-                            <td class="table-ex-id">{{ exercise.exercise_id }}</td>
-                            <td class="table-ex-name">{{ exercise.exercise }}</td>
-                            <td class="table-ex-variation">{{ exercise.variation }}</td>
-                            <td class="table-ex-focus">{{ exercise.focus }}</td>
-                            <td class="table-ex-muscle">{{ exercise.muscle }}</td>
-                            <td class="table-ex-chain">{{ exercise.chain }}</td>
+                            <td>
+                                <span class="parent">{{ exercise.exercise }} - {{ exercise.variation }}</span><br>
+                                <span class="child">Muscle: {{ exercise.muscle }} </span><br>
+                                <span class="child">Chain: {{ exercise.chain }}</span>
+                            </td>
                         </tr>
                     {% endfor %}
                 </tbody>
