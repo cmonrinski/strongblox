@@ -34,7 +34,7 @@
 					{% for month_year, days in vertical_calendar.items() %}
 					{% if day in days %}
 						{% if days[day] == "" %}
-						<td style="background-color:tomato;">{{ day }}</td>
+						<td class="no-workout">{{ day }}</td>
 						{% else %}
 						<td>{{ day }} - {{ days[day] }}</td>
 						{% endif %}

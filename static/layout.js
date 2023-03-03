@@ -9,5 +9,4 @@ document.addEventListener("click", function(event) {
     if (event.target.id !== "account-button") {
         document.getElementById("account-menu").classList.remove("show")
     }
-
 });
