@@ -18,6 +18,72 @@
             <li>Exercise output to analyze strength in muscles and potential appropriate ratios</li>
         </ul>
     </div>
+    <div class="section data">
+        <table id="table-exercises">
+            <div>  
+                <p class="history-calendar">Chain Breakdown</p>
+            </div>
+            <tbody>
+                <!-- Loop through data -->
+                {% for chain, count in chain_count.items() %}
+                <tr>
+                    <td>{{ chain }}</td>
+                    <td>{{ count[0] }}</td>
+                    <td>{{ "%.1f"|format(count[1]) }}%</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="section data">
+        <table id="table-exercises">
+            <div>  
+                <p class="history-calendar">Focus Breakdown</p>
+            </div>
+            <tbody>
+                <!-- Loop through data -->
+                {% for focus, count in focus_count.items() %}
+                <tr>
+                    <td>{{ focus }}</td>
+                    <td>{{ count[0] }}</td>
+                    <td>{{ "%.1f"|format(count[1]) }}%</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="section data">
+        <table id="table-exercises">
+            <div>  
+                <p class="history-calendar">Most Used Exercises</p>
+            </div>
+            <tbody>
+                <!-- Loop through data -->
+                {% for exercise in exercise_count %}
+                <tr>
+                    <td>{{ exercise.exercise }}</td>
+                    <td>{{ exercise.count }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="section data">
+        <table id="table-exercises">
+            <div>  
+                <p class="history-calendar">Most Used Exercises - Variation</p>
+            </div>
+            <tbody>
+                <!-- Loop through data -->
+                {% for variation in variation_count %}
+                <tr>
+                    <td>{{ variation.exercise_variation }}</td>
+                    <td>{{ variation.count }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
 
 {% endblock %}

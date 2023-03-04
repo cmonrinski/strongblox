@@ -16,6 +16,30 @@
 			</p>
 		</div>
 	</div>
+	<div class="section">
+		<!-- Tab links -->
+		<div class="tab">
+			<button class="tablinks" onclick="openTab(event, 'index-exercises')">Exercises</button>
+			<button class="tablinks" onclick="openTab(event, 'index-chains')">Chains</button>
+			<button class="tablinks" onclick="openTab(event, 'index-focus')">Focus</button>
+		</div>
+		
+		<!-- Tab content -->
+		<div id="index-exercises" class="tabcontent">
+			<h2>Exercises</h2>
+			<p>London is the capital city of England.</p>
+		</div>
+		
+		<div id="index-chains" class="tabcontent">
+			<h2>Chains</h2>
+			<p>Paris is the capital of France.</p>
+		</div>
+		
+		<div id="index-focus" class="tabcontent">
+			<h2>Focus</h2>
+			<p>Tokyo is the capital of Japan.</p>
+		</div>
+	</div>
 
 {% if session["user_id"] %}
 
@@ -68,6 +92,27 @@
 				}
 		});
 	}
+
+	function openTab(evt, tabName) {
+		// Declare all variables
+		var i, tabcontent, tablinks;
+	  
+		// Get all elements with class="tabcontent" and hide them
+		tabcontent = document.getElementsByClassName("tabcontent");
+		for (i = 0; i < tabcontent.length; i++) {
+		  tabcontent[i].style.display = "none";
+		}
+	  
+		// Get all elements with class="tablinks" and remove the class "active"
+		tablinks = document.getElementsByClassName("tablinks");
+		for (i = 0; i < tablinks.length; i++) {
+		  tablinks[i].className = tablinks[i].className.replace(" active", "");
+		}
+	  
+		// Show the current tab, and add an "active" class to the button that opened the tab
+		document.getElementById(tabName).style.display = "block";
+		evt.currentTarget.className += " active";
+	  }
 </script>
 
 {% endif %}

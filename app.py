@@ -94,6 +94,114 @@ def index():
         return render_template("index.html", vertical_calendar=vertical_calendar)
 
 
+@app.route("/data")
+@login_required
+def data():
+
+    # Display all equipments in database from SQLite on equipment.html
+    db = sqlite3.connect("workouts.db")
+    db.row_factory = sqlite3.Row
+    cur = db.cursor()
+    
+    # Get exercise and count
+    cur.execute("SELECT exercise, COUNT(exercise) AS count FROM routines WHERE user_id = ? GROUP BY exercise ORDER BY COUNT(exercise) desc", (session["user_id"],))
+    exercise_count = cur.fetchall()
+    
+    # Get exercise + variation and count
+    cur.execute("SELECT exercise || '-' || variation AS exercise_variation, COUNT(*) AS count FROM routines WHERE user_id = ? GROUP BY exercise || '-' || variation ORDER BY COUNT(exercise) desc, exercise", (session["user_id"],))
+    variation_count = cur.fetchall()
+
+    """
+
+    SELECT e.chain, count(*) AS count 
+    FROM exercises e 
+    JOIN routines r ON e.exercise = r.exercise AND e.variation = r.variation 
+    WHERE r.user_id = 1 
+    GROUP BY e.chain;
+
+    SELECT r.exercise || '-' || r.variation AS exercise_variation, e.chain 
+    FROM exercises e 
+    JOIN routines r ON e.exercise = r.exercise AND e.variation = r.variation 
+    WHERE r.user_id = 1;
+
+    SELECT exercise FROM routines WHERE user_id = 1;
+
+    """
+
+    # Get chain data together
+    cur.execute("SELECT e.chain, count(*) AS count FROM exercises e JOIN routines r ON e.exercise = r.exercise AND e.variation = r.variation WHERE r.user_id = ? GROUP BY e.chain;", (session["user_id"],))
+    chain_temp = cur.fetchall()
+
+    # Define chain count dict and set all values to 0
+    chain_count = {}
+    chain_total_count = 0
+
+    # Set 0 as count for each chain in dict
+    for chain in CHAINS:
+        chain_count[chain] = 0
+
+    # Loop through temp and match to correct chain, then update dict value
+    for row in chain_temp: 
+        for chain in CHAINS:
+            if row[0] == chain:
+                chain_total_count += row[1]
+                chain_count[chain] = row[1]
+
+    # Add percent of chain compared to total count
+    for chain in CHAINS:
+        chain_percent = 100 * (float(chain_count[chain]) / float(chain_total_count))
+        chain_count[chain] = [chain_count[chain], chain_percent]
+
+
+    """ 
+
+    SELECT e.focus, count(*) AS count FROM exercises e 
+    JOIN routines r ON e.exercise = r.exercise AND e.variation = r.variation 
+    WHERE r.user_id = 1 
+    GROUP BY e.focus;
+
+    SELECT e.exercise, e.focus AS count FROM exercises e 
+    JOIN routines r ON e.exercise = r.exercise AND e.variation = r.variation 
+    WHERE r.user_id = 1;
+
+    SELECT e.focus, e.exercise, count(*) AS count FROM exercises e 
+    JOIN routines r ON e.exercise = r.exercise AND e.variation = r.variation 
+    WHERE r.user_id = 1 
+    GROUP BY e.focus;
+
+
+    """
+
+    # Get Focuses data together
+    cur.execute("SELECT e.focus, count(*) AS count FROM exercises e JOIN routines r ON e.exercise = r.exercise AND e.variation = r.variation WHERE r.user_id = ? GROUP BY e.focus;", (session["user_id"],))
+    focus_temp = cur.fetchall()
+
+    focus_count = {}
+    focus_total_count = 0
+
+    # Set 0 as count for each focus in dict
+    for focus in FOCUSES:
+        focus_count[focus] = 0
+
+    # Loop through temp and match to correct focus, then update dict value
+    for row in focus_temp:
+        for focus in FOCUSES:
+            if row[0] == focus:
+                focus_total_count += row[1]
+                focus_count[focus] = row[1]
+
+    # Add percent of focus compared to total count
+    for focus in FOCUSES:
+        focus_percent = 100 * (float(focus_count[focus]) / float(focus_total_count))
+        focus_count[focus] = [focus_count[focus], focus_percent] 
+
+    # Get Antirotation data together
+
+    # Get strength data (will probably need to create strenght value of each exercise and a recency value (like last 30 days))
+
+    return render_template("data.html", exercise_count=exercise_count, variation_count=variation_count, chain_count=chain_count, focus_count=focus_count)
+
+
 @app.route("/equipment", methods=["GET", "POST"])
 @login_required
 def equipment():
@@ -196,6 +304,21 @@ def muscles():
         return render_template("muscles.html", muscles=muscles)
 
 
+@app.route("/history")
+@login_required
+def history():
+
+    db = sqlite3.connect("workouts.db")
+    db.row_factory = sqlite3.Row
+    cur = db.cursor()
+
+    # Display all routines in database from SQLite on history.html
+    cur.execute("SELECT * FROM routines WHERE user_id IS NULL OR user_id = ? ORDER BY routine_id DESC", (session["user_id"],))
+    routines = cur.fetchall()
+
+    return render_template("history.html", routines=routines)
+
+
 @app.route("/routine", methods=["GET", "POST"])
 @login_required
 def routine():
@@ -272,27 +395,6 @@ def routine():
         exercises=exercises, antirotations=ANTIROTATIONS, equipments=equipments, variations=variations, routine_history=routine_history)
 
 
-@app.route("/history")
-@login_required
-def history():
-
-    db = sqlite3.connect("workouts.db")
-    db.row_factory = sqlite3.Row
-    cur = db.cursor()
-
-    # Display all routines in database from SQLite on history.html
-    cur.execute("SELECT * FROM routines WHERE user_id IS NULL OR user_id = ? ORDER BY routine_id DESC", (session["user_id"],))
-    routines = cur.fetchall()
-
-    return render_template("history.html", routines=routines)
-
-
-@app.route("/timer")
-def timer():
-
-    return render_template("timer.html")
-
-
 @app.route("/success")
 @login_required
 def success():
@@ -300,11 +402,10 @@ def success():
     return render_template("success.html")
 
 
-@app.route("/data")
-@login_required
-def data():
+@app.route("/timer")
+def timer():
 
-    return render_template("data.html")
+    return render_template("timer.html")
 
 
 @app.route("/calendar")
