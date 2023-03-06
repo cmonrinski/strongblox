@@ -207,9 +207,31 @@ input {
   display: block;
 }
 
+/* TABS */
+
+.tab-div > .tab {
+  background-color: #ffe599;
+  text-align: center;
+  line-height: 27px;
+}
+
+.tab button {
+  font-size: 16px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: black;
+}
+
+.tabcontent {
+  display: none;
+}
+
+
+
 /* Index */
 /* Style the buttons that are used to open and close the accordion panel */
-.accordion {
+#index-welcome .accordion {
   background-color: white;
   cursor: pointer;
   padding: 0px;
@@ -220,18 +242,45 @@ input {
   transition: 0.4s;
 }
 
+/* Style the accordion panel. Note: hidden by default */
+#index-welcome .panel {
+  background-color: white;
+  display: none;
+  overflow: hidden;
+}
+
+.tab-div {
+  width: 500px;
+}
+
+.tab .active {
+  background-color: orange;
+}
+
+#table-simple {
+  margin: 10px;
+  width: 90vw;
+  max-width: 400px;
+}
+
+#table-simple td {
+  padding: 10px;
+  line-height: 27px;
+}
+
+#table-simple tbody > tr:nth-child(even) {
+  background-color: #cfe2f3;
+}
+
+#table-simple tbody > tr:nth-child(odd) {
+  background-color: #9fc5e8;
+}
+
 /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
 .highlight {
   background-color: #6fa8dc;
 }
 
-/* Style the accordion panel. Note: hidden by default */
-.panel {
-  padding: 0 18px;
-  background-color: white;
-  display: none;
-  overflow: hidden;
-}
 
 /* Timer */
 .timer-widget {
@@ -283,14 +332,14 @@ input {
   padding: 3px;
 }
 
-.active {
+.about-table .active {
   text-align: center;
   border: 1px solid black;
   background-color: green;
   width: 160px;
 }
 
-.rest {
+.about-table .rest {
   text-align: center;
   border: 1px solid black;
   background-color: tomato;
@@ -335,7 +384,7 @@ input {
   background-color: transparent;
   cursor: pointer;
   padding: 0px;
-  width: 100%;
+  width: fit-content;
   text-align: left; 
   border: none;
   outline: none;
@@ -344,12 +393,47 @@ input {
 
 /* Style the accordion panel. Note: hidden by default */
 #table-exercises .panel {
-  /* padding: 0 18px; */
   background-color: transparent;
   display: none;
   overflow: hidden;
   line-height: 27px;
 }
+
+/* INNER EXERCISE TABLE */
+#inner-table-exercises {
+  width: 100%;
+}
+
+#inner-table-exercises td.inner {
+  padding-left: 30px;
+}
+
+#inner-table-exercises .inner div {
+  padding-left: 30px;
+}
+
+#inner-table-exercises td {
+  padding: 10px;
+}
+
+#inner-table-exercises td > span {
+  padding: 10px;
+  margin: 10px;
+  line-height: 27px;
+}
+
+#inner-table-exercises td > span.child {
+  padding-left: 30px;
+}
+
+#inner-table-exercises tbody > tr:nth-child(even) {
+  background-color: #d9ead3;
+}
+
+#inner-table-exercises tbody > tr:nth-child(odd) {
+  background-color: #b6d7a8;
+}
+
 
 /* Equipement Table */
 
@@ -371,6 +455,7 @@ input {
 #table-equipment tbody > tr:nth-child(odd) {
   background-color: #9fc5e8;
 }
+
 /* Muscles Table */
 
 #table-muscles {
@@ -396,7 +481,9 @@ input {
 
 .history-calendar {
   text-align: center;
+  font-weight: bold;
   background-color: #ffe599;
+  line-height: 27px;
 }
 
 #table-history {

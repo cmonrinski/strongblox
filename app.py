@@ -98,6 +98,7 @@ def index():
 @login_required
 def data():
 
+    """" SQLite section """
     # Display all equipments in database from SQLite on equipment.html
     db = sqlite3.connect("workouts.db")
     db.row_factory = sqlite3.Row
@@ -111,27 +112,17 @@ def data():
     cur.execute("SELECT exercise || '-' || variation AS exercise_variation, COUNT(*) AS count FROM routines WHERE user_id = ? GROUP BY exercise || '-' || variation ORDER BY COUNT(exercise) desc, exercise", (session["user_id"],))
     variation_count = cur.fetchall()
 
-    """
-
-    SELECT e.chain, count(*) AS count 
-    FROM exercises e 
-    JOIN routines r ON e.exercise = r.exercise AND e.variation = r.variation 
-    WHERE r.user_id = 1 
-    GROUP BY e.chain;
-
-    SELECT r.exercise || '-' || r.variation AS exercise_variation, e.chain 
-    FROM exercises e 
-    JOIN routines r ON e.exercise = r.exercise AND e.variation = r.variation 
-    WHERE r.user_id = 1;
-
-    SELECT exercise FROM routines WHERE user_id = 1;
-
-    """
-
     # Get chain data together
     cur.execute("SELECT e.chain, count(*) AS count FROM exercises e JOIN routines r ON e.exercise = r.exercise AND e.variation = r.variation WHERE r.user_id = ? GROUP BY e.chain;", (session["user_id"],))
     chain_temp = cur.fetchall()
 
+    # Get Focuses data together
+    cur.execute("SELECT e.focus, count(*) AS count FROM exercises e JOIN routines r ON e.exercise = r.exercise AND e.variation = r.variation WHERE r.user_id = ? GROUP BY e.focus;", (session["user_id"],))
+    focus_temp = cur.fetchall()
+
+    db.close()
+
+    """ Chain Count Setion """
     # Define chain count dict and set all values to 0
     chain_count = {}
     chain_total_count = 0
@@ -152,30 +143,8 @@ def data():
         chain_percent = 100 * (float(chain_count[chain]) / float(chain_total_count))
         chain_count[chain] = [chain_count[chain], chain_percent]
 
-
-    """ 
-
-    SELECT e.focus, count(*) AS count FROM exercises e 
-    JOIN routines r ON e.exercise = r.exercise AND e.variation = r.variation 
-    WHERE r.user_id = 1 
-    GROUP BY e.focus;
-
-    SELECT e.exercise, e.focus AS count FROM exercises e 
-    JOIN routines r ON e.exercise = r.exercise AND e.variation = r.variation 
-    WHERE r.user_id = 1;
-
-    SELECT e.focus, e.exercise, count(*) AS count FROM exercises e 
-    JOIN routines r ON e.exercise = r.exercise AND e.variation = r.variation 
-    WHERE r.user_id = 1 
-    GROUP BY e.focus;
-
-
-    """
-
-    # Get Focuses data together
-    cur.execute("SELECT e.focus, count(*) AS count FROM exercises e JOIN routines r ON e.exercise = r.exercise AND e.variation = r.variation WHERE r.user_id = ? GROUP BY e.focus;", (session["user_id"],))
-    focus_temp = cur.fetchall()
-
+    """ Focus Count Section """
+    # Define focus count dict and set all values to 0
     focus_count = {}
     focus_total_count = 0
 
@@ -195,9 +164,12 @@ def data():
         focus_percent = 100 * (float(focus_count[focus]) / float(focus_total_count))
         focus_count[focus] = [focus_count[focus], focus_percent] 
 
+    
     # Get Antirotation data together
 
     # Get strength data (will probably need to create strenght value of each exercise and a recency value (like last 30 days))
+
+
 
     return render_template("data.html", exercise_count=exercise_count, variation_count=variation_count, chain_count=chain_count, focus_count=focus_count)
 
@@ -271,7 +243,27 @@ def exercises():
         cur.execute("SELECT * FROM exercises WHERE user_id IS NULL OR user_id = ? ORDER BY exercise", (session["user_id"],))
         exercises = cur.fetchall()
 
-        return render_template("exercises.html", exercises=exercises, muscles=muscles, chains=CHAINS, focuses=FOCUSES, antirotations=ANTIROTATIONS)
+        cur.execute("SELECT DISTINCT exercise FROM exercises WHERE user_id IS NULL OR user_id = ? ORDER BY exercise", (session["user_id"],))
+        distinct_exercises = cur.fetchall()
+
+        db.close()
+
+        return render_template("exercises.html", distinct_exercises=distinct_exercises, exercises=exercises, muscles=muscles, chains=CHAINS, focuses=FOCUSES, antirotations=ANTIROTATIONS)
+
+
+@app.route("/history")
+@login_required
+def history():
+
+    db = sqlite3.connect("workouts.db")
+    db.row_factory = sqlite3.Row
+    cur = db.cursor()
+
+    # Display all routines in database from SQLite on history.html
+    cur.execute("SELECT * FROM routines WHERE user_id IS NULL OR user_id = ? ORDER BY routine_id DESC", (session["user_id"],))
+    routines = cur.fetchall()
+
+    return render_template("history.html", routines=routines)
 
 
 @app.route("/muscles", methods=["GET", "POST"])
@@ -302,21 +294,6 @@ def muscles():
         muscles = cur.fetchall()
 
         return render_template("muscles.html", muscles=muscles)
-
-
-@app.route("/history")
-@login_required
-def history():
-
-    db = sqlite3.connect("workouts.db")
-    db.row_factory = sqlite3.Row
-    cur = db.cursor()
-
-    # Display all routines in database from SQLite on history.html
-    cur.execute("SELECT * FROM routines WHERE user_id IS NULL OR user_id = ? ORDER BY routine_id DESC", (session["user_id"],))
-    routines = cur.fetchall()
-
-    return render_template("history.html", routines=routines)
 
 
 @app.route("/routine", methods=["GET", "POST"])

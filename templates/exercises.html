@@ -41,19 +41,37 @@
         <div class="section data">
             <table id="table-exercises">
                 <div class="sticky">  
-                    <p class="history-calendar">Exercises</p>
+                    <p class="history-calendar">Exercises + last sets/reps/weight</p>
                 </div>
                 <tbody>
-                    <!-- Loop through the exercise database entries to display them in this table -->
-                    {% for exercise in exercises %}
+                    <!-- Loop through the distinct exercise names to display them in this table -->
+                    {% for distinct_exercise in distinct_exercises %}
                         <tr>
-                            <td>
+                            <td class="outer">
+                                <!-- Create a button for the exercise name -->
                                 <button class="accordion">
-                                    <span class="parent">{{ exercise.exercise }} - {{ exercise.variation }}</span>
+                                    {{ distinct_exercise.exercise }}
                                 </button>
+                                <!-- Create a panel for the exercise variations -->
                                 <div class="panel">
-                                    <span class="child">Muscle: {{ exercise.muscle }} </span><br>
-                                    <span class="child">Chain: {{ exercise.chain }}</span>
+                                    <table id="inner-table-exercises">
+                                        <!-- Loop through the exercise variations and display them as table rows -->
+                                        {% for exercise in exercises %}
+                                            {% if distinct_exercise.exercise == exercise.exercise %}
+                                                <tr>
+                                                    <td class="inner">
+                                                        <button class="inner accordion">
+                                                            <span class="parent">{{ exercise.variation }}</span>
+                                                        </button>
+                                                        <div class="panel">
+                                                            <span class="child">Muscle: {{ exercise.muscle }} </span><br>
+                                                            <span class="child">Chain: {{ exercise.chain }}</span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </table>
                                 </div>
                             </td>
                         </tr>
